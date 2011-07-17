@@ -1,43 +1,87 @@
 $(function() {
-	$('header a').bind('click',function(event){
+	
+	app = {};
+
+	$("#access ul").append('<li id="magic-arrow" style="width: 100%"></li>');
+
+	magicArrow = {
+		
+		el: $("#magic-arrow"),
+		
+		locked: false, 
+
+		lock: function(){
+			this.locked = true;
+
+		},
+		
+		unLock: function(){
+			this.locked = false;
+			console.log('test')
+		},
+
+		animateTo: function(target){
+
+			if (this.locked) return;
+
+			var leftPos = target.position().left;
+			var newWidth = target.parent().width();
+
+			this.el.stop().animate({
+				left: leftPos,
+				width: newWidth
+			});
+
+		}
+
+	}
+
+	setActiveSection('title')
+
+	$("#access ul li a").hover(function() {
+
+		magicArrow.unLock();
+		magicArrow.animateTo($(this)) 
+		
+	}, function() {
+
+		magicArrow.animateTo($('#access li.active a')) 
+
+	});
+
+	$('#access a').click(function(event){
 		var target = $($(this).attr('href'))
 		var y = target.offset().top + (target.height() / 2 ) - ($(window).height() / 2 ) - 60;
 
-		$('html, body').stop().animate({ scrollTop: y }, 1000, 'easeInOutExpo' );
-		/*
-		if you don't want to use the easing effects:
-		$('html, body').stop().animate({
-			scrollTop: $($anchor.attr('href')).offset().top
-		}, 1000);
-		*/
+		magicArrow.lock();
+
+		$('body').stop().animate({ scrollTop: y }, 1000, 'easeInOutExpo', function(){
+			magicArrow.unLock();
+		});
+
 		event.preventDefault();
 	});
-});
 
-var $el, leftPos, newWidth,
-	$mainNav = $("#access ul");
 
-$mainNav.append("<li id='magic-line'></li>");
-var $magicLine = $("#magic-line");
+	$('section').appear(function() {
 
-$magicLine
-	.width($("li.active").width())
-	.css("left", $(".active a").position().left)
-	.data("origLeft", $magicLine.position().left)
-	.data("origWidth", $magicLine.width());
+		setActiveSection($(this).attr('id'))
+	  	
+	}, {one: false});
 
-$("#access ul li a").hover(function() {
-	console.log('hover')
-	$el = $(this);
-	leftPos = $el.position().left;
-	newWidth = $el.parent().width();
-	$magicLine.stop().animate({
-		left: leftPos,
-		width: newWidth
-	});
-}, function() {
-	$magicLine.stop().animate({
-		left: $magicLine.data("origLeft"),
-		width: $magicLine.data("origWidth")
-	});
+
+	function setActiveSection(sectionId){
+		
+		$('section').removeClass('active')
+		$('section#' + sectionId).addClass('active')
+
+		$('#access li').removeClass('active')
+		$('#access li#nav-' + sectionId ).addClass('active')
+		
+		magicArrow.animateTo($('#access #nav-' + sectionId + ' a'))
+
+	}
+
+	
+
 });

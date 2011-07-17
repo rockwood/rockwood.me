@@ -16,7 +16,7 @@
 	<meta name="author" content="">
 
 	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
@@ -40,19 +40,21 @@
 		<header id="header">
 			<div class="container">
 				
-				<div id="logo">
+<!-- 				<div id="logo">
 					<a href="#title"><img src="img/logo.png"/></a>
-				</div>
+				</div> -->
 
 				<nav id="access">
 					<ul>
-						<li class="left"><a href="#work">work</a></li>
-						<li class="left"><a href="#services">services</a></li>
+						
+						<li class="left" id="nav-services" ><a href="#services">services</a></li>
+						<li class="left" id="nav-work" ><a href="#work">work</a></li>
+						
+						<li class="title active" id="nav-title"><div><span><a href="#title"><img src="img/logo.png"/></a></span></div></li>
 
-						<li class="default active"><a></a></li>
-
-						<li class="right"><a href="#connect">connect</a></li>
-						<li class="right"><a href="#about">about</a></li>
+						<li class="right" id="nav-about"><a href="#about">about</a></li>
+						<li class="right" id="nav-connect"><a href="#connect">connect</a></li>
+						
 					</ul>
 				</nav>
 
@@ -64,14 +66,14 @@
 		<div id="content">
 			
 			<section id="title">
-				<h1>Kevin Rockwood</h1>
-				<h2>web developer</h2>
-			</section>
+				<h1 id="site-title">Kevin Rockwood</h1>
+				<h2 id="site-description">web developer</h2>
 
-			<section class="screem">
-				<div class="separator"></div>
-				<h1> I'm obsessed with building high quality software </h1>
-				<div class="separator"/></div>
+				<div class="screem">
+					<div class="separator"></div>
+					<h1> "I write crazy good software" </h1>
+					<div class="separator"/></div>
+				</div>
 			</section>
 
 			<div class="line"></div>
@@ -167,7 +169,7 @@
 		</div>
 		
 		<footer>
-
+			<p>&copy; 2011 Kevin Rockwood</p>
 		</footer>
 		
 	</div> <!--! end of #container -->
