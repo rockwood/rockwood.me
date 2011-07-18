@@ -1,6 +1,18 @@
-$(function() {
-	
-	app = {};
+$(function () {
+
+	var magicArrow;
+
+	function setActiveSection(sectionId) {
+		
+		$('section').removeClass('active');
+		$('section#' + sectionId).addClass('active');
+
+		$('#access li').removeClass('active');
+		$('#access li#nav-' + sectionId).addClass('active');
+		
+		magicArrow.animateTo($('#access #nav-' + sectionId + ' a'));
+
+	}
 
 	$("#access ul").append('<li id="magic-arrow" style="width: 100%"></li>');
 
@@ -10,78 +22,64 @@ $(function() {
 		
 		locked: false, 
 
-		lock: function(){
+		lock: function () {
 			this.locked = true;
-
+			console.log('locked');
 		},
 		
-		unLock: function(){
+		unLock: function () {
 			this.locked = false;
-			console.log('test')
+			console.log('unlocked');
 		},
 
-		animateTo: function(target){
+		animateTo: function (target) {
 
-			if (this.locked) return;
+			if (this.locked) { 
+				return; 
+			}
 
 			var leftPos = target.position().left;
 			var newWidth = target.parent().width();
 
-			this.el.stop().animate({
-				left: leftPos,
-				width: newWidth
-			});
+			this.el.stop().animate({ left: leftPos, width: newWidth });
 
 		}
 
-	}
+	};
 
-	setActiveSection('title')
+	setActiveSection('title');
 
-	$("#access ul li a").hover(function() {
+	$("#access ul li a").hover(function () {
 
 		magicArrow.unLock();
-		magicArrow.animateTo($(this)) 
+		magicArrow.animateTo($(this));
 		
-	}, function() {
+	}, function () {
 
-		magicArrow.animateTo($('#access li.active a')) 
+		magicArrow.animateTo($('#access li.active a'));
 
 	});
 
-	$('#access a').click(function(event){
-		var target = $($(this).attr('href'))
-		var y = target.offset().top + (target.height() / 2 ) - ($(window).height() / 2 ) - 60;
+	$('#access a').click(function (event) {
+
+		var target = $($(this).attr('href'));
+		var y = target.offset().top + (target.height() / 2) - ($(window).height() / 2) - 60;
 
 		magicArrow.lock();
 
-		$('body').stop().animate({ scrollTop: y }, 1000, 'easeInOutExpo', function(){
+		$('body, html').stop().animate({ scrollTop: y }, 1000, 'easeInOutExpo', function () {
 			magicArrow.unLock();
 		});
 
 		event.preventDefault();
+
 	});
 
 
-	$('section').appear(function() {
+	$('section').appear(function () {
 
-		setActiveSection($(this).attr('id'))
-	  	
+		setActiveSection($(this).attr('id'));
+
 	}, {one: false});
-
-
-	function setActiveSection(sectionId){
-		
-		$('section').removeClass('active')
-		$('section#' + sectionId).addClass('active')
-
-		$('#access li').removeClass('active')
-		$('#access li#nav-' + sectionId ).addClass('active')
-		
-		magicArrow.animateTo($('#access #nav-' + sectionId + ' a'))
-
-	}
-
-	
 
 });
