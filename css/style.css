@@ -217,7 +217,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 /* Header
 -----------------------------------------*/
 
-header{ position: fixed; top: 0; height: 4em; width: 100%; z-index: 100; background: url("../img/bg_leather.png"); border-bottom: 1px solid #999;  }
+
+header{ position: fixed; top: 0; left: 0; height: 4em; width: 100%; z-index: 100; background: url("../img/bg_leather.png"); border-bottom: 1px solid #999;  }
 header .container{ width: 100%; margin: 0 auto; }
 
 #access ul li.left{ float: left; }
@@ -238,7 +239,7 @@ header .container{ width: 100%; margin: 0 auto; }
 
 /* Main
 -----------------------------------------*/
-section{ overflow: auto; }
+section{ overflow: visible; }
 
 #content{ width: 90%; margin: 0 auto; margin-top: 14em; }
 
@@ -274,6 +275,8 @@ section{ overflow: auto; }
 .icon#google div:hover{ background-position: bottom left;}
 .icon#twitter div:hover{ background-position: bottom right;}
 
+
+#about p{ padding: 0 2em; }
 
 /* Footer
 -----------------------------------------*/

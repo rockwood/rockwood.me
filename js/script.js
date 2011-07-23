@@ -49,22 +49,41 @@ $(function () {
 
 	setActiveSection('title');
 
-	$("#access ul li a").hover(function () {
+	$("#access ul li a").hover(
 
-		magicArrow.unLock();
-		magicArrow.animateTo($(this));
-		
-	}, function () {
+		function () {
 
-		magicArrow.animateTo($('#access li.active a'));
+			magicArrow.unLock();
+			magicArrow.animateTo($(this));
+			
+		}, 
 
-	});
+		function () {
+
+			magicArrow.animateTo($('#access li.active a'));
+
+		}
+	);
 
 	$('#access a').click(function (event) {
 
 		var target = $($(this).attr('href'));
-		var y = target.offset().top + (target.height() / 2) - ($(window).height() / 2) - 60;
+		var viewport = $(window);
+		var y;
 
+		//if the height of the viewport exceeds the target's height, then we scroll so the target is centered in the viewport. Otherwise we scroll to the top of the target.
+		if( target.height() > viewport.height() ){
+			
+			console.log('yep')
+			y = target.offset().top - 150;
+			console.log(y)
+		}else{
+			console.log('nope')
+			y = target.offset().top + (target.height() / 2) - (viewport.height() / 2) - 60;
+			
+		}
+
+		
 		magicArrow.lock();
 
 		$('body, html').stop().animate({ scrollTop: y }, 1000, 'easeInOutExpo', function () {
