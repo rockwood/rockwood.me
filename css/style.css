@@ -241,7 +241,7 @@ header .container{ width: 100%; margin: 0 auto; }
 -----------------------------------------*/
 section{ overflow: visible; }
 
-#content{ width: 90%; margin: 0 auto; margin-top: 14em; }
+#content{ width: 90%; margin: 0 auto; margin-top: 8em; }
 
 #title{ text-align: center; }
 #title h1#site-title{ font-size: 1.5em; font-weight: bold; margin-bottom: 0; text-transform: uppercase; }
@@ -325,8 +325,10 @@ footer p{text-align: center; color: #fff; font-size: 75%;}
   /* Style adjustments for viewports 480px and over go here */
 
   #content, header .container{ max-width: 60em; }
+  
+  #content{margin-top: 14em;}
   .tile{ float: left; width: 33.333%; border-bottom: none;}
-   
+
    #access{width: 35em;}
    #access a { padding: 0 1em;}
 

@@ -75,7 +75,7 @@ $(function () {
 		if( target.height() > viewport.height() ){
 			
 			console.log('yep')
-			y = target.offset().top - 150;
+			y = target.offset().top - 130;
 			console.log(y)
 		}else{
 			console.log('nope')
